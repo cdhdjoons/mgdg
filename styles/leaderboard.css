@@ -1,0 +1,25 @@
+/* styles/game.css */
+
+  
+  /* 스크롤바의 너비 */
+  .scroll-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* 스크롤바의 배경 */
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  /* 스크롤바의 핸들 */
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #5c5c5c;
+    border-radius: 10px;
+  }
+  
+  /* 스크롤바 핸들의 hover 상태 */
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #692525;
+  }
+  
