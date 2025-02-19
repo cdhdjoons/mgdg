@@ -45,7 +45,7 @@ export default function LeaderBoard() {
                     if (user.user) {
                         setTeleId(user.user.first_name);
                     } else {
-                        setTeleId('CDHDjoons')
+                        setTeleId('--')
                         setN2O(0)
                     }
                 }
@@ -92,7 +92,7 @@ export default function LeaderBoard() {
                                         objectFit="cover"
                                     />
                                 </div>
-                                <p className=" text-[#FFD37E] text-[4.8vmin] sm:text-[2vmin]">45.1k</p>
+                                <p className=" text-[#FFD37E] text-[4.8vmin] sm:text-[2vmin]">{n2o}</p>
                             </div>
                         </div>
                     </div>
