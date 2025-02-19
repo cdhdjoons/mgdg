@@ -1,5 +1,5 @@
 
-import { Lilita_One } from "next/font/google";
+import { Lilita_One, El_Messiri } from "next/font/google";
 import "./globals.css";
 import Script from 'next/script';
 import Footer from "./components/footer";
@@ -13,17 +13,23 @@ const lilita = Lilita_One({
   weight: '400',
 });
 
+const elMessiri = El_Messiri({
+  subsets: ["latin"],
+  weight: ["400", "700"], // Regular (400) & Bold (700)
+  display: "swap",
+});
+
 export const metadata = {
-  title: "FUSED N FURIOUS",
-  description: "FNFSh_game",
+  title: "Mystic The Gathering",
+  description: "MGDG_Game",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`bg-black flex justify-center min-h-dvh m-0 p-0 ${lilita.className}`} >
+      <body className={`bg-black flex justify-center min-h-dvh m-0 p-0 ${elMessiri.className}`} >
         <div className=" w-full max-w-[500px] max-h-[1080px] bg-cover bg-no-repeat relative flex flex-col justify-between overflow-hidden"
-          style={{ backgroundImage: `url(/image/BG_fnfs.png)` }}>
+          style={{ backgroundImage: `url(/image/bg_mdgd.png)` }}>
           {children}
           <Analytics />
           <SpeedInsights />

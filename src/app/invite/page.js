@@ -30,40 +30,54 @@ export default function Invite() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                <div className=" w-full h-full max-w-[500px] pt-3 relative flex flex-col justify-evenly items-center bg-cover bg-no-repeat " >
-                    <div className="w-full h-[15%] bg-no-repeat bg-cover absolute top-0 " style={{ backgroundImage: `url(/image/side_bg.png)` }}></div>
+                <div className=" bg-balanceBg w-full h-full max-w-[500px] relative flex flex-col justify-evenly items-center bg-cover bg-no-repeat " >
+                    <div className="w-full h-[15%] bg-no-repeat bg-cover absolute top-0 " ></div>
                     {copied ? <div className="absolute top-[10px] z-[999]"><Alert severity="success">Copy Complete.</Alert></div> : ''}
-                    <div className={`w-[32vmax] max-w-[500px] relative ${franklinGothic.variable} font-franklin`}>
-                        
-                        <p className="w-full text-center text-[5vmax] sm:text-[6vmin] -rotate-2
-        bg-gradient-to-r from-[#F92F2F] via-[#FEA5A5] to-[#EB1515] bg-clip-text text-transparent [-webkit-text-stroke:1px_black] ">Invite friends</p>
+                    <div className={`w-full max-w-[500px] relative `}>
+                        <p className="w-full text-center text-[6vmax] sm:text-[6vmin] -rotate-2
+        bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent [-webkit-text-stroke:0.6px_black] ">Invite friends</p>
                     </div>
-                    <p className={` ${franklinGothic.variable} font-franklin text-white text-[3.3vmin] sm:text-[1.5vmin]`}>Invite friends, complete and earn more</p>
-                    <p className=" text-white text-[6vmin] sm:text-[3vmin]">How it works</p>
-                    <div className="w-[65vmin] sm:w-[30vmin] aspect-[325/337] relative active:scale-90 transition-transform duration-200">
+                    <p className={` text-[3.5vmin] sm:text-[1.6vmin] font-bold bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent`}>Invite friends, complete and earn more</p>
+
+                    <div className="w-[80%] mr-[20%] h-[35%] relative  ">
+                        <div className=" w-full h-full relative ">
+                            <Image
+                                src="/image/scroll.png"
+                                alt="scroll"
+                                layout="fill"
+                                objectFit="fill"
+                            />
+                        </div>
+                    </div>
+                    <div className=" w-[80%] aspect-[489/400] relative flex flex-col justify-around items-center">
                         <Image
-                            src="/image/invite_car.png"
-                            alt="main logo"
+                            src="/image/inviteinfo.png"
+                            alt="scroll"
                             layout="fill"
-                            objectFit="cover"
+                            objectFit="fill"
                         />
+                        <div className="flex flex-col gap-0 items-center">
+                            <p className=" text-white text-[8vmin] sm:text-[5vmin]">How it works</p>
+                            <p className=" text-white text-[4vmin] sm:text-[2.7vmin]">Share your invitation link</p>
+                            <p className=" text-white text-[3vmin] sm:text-[2vmin]">Get a play pass for each friends</p>
+                        </div>
+                        <div className="flex flex-col gap-0 items-center">
+                            <p className=" text-white text-[4vmin] sm:text-[2.7vmin]">Your friends join Mystic</p>
+                            <p className=" text-white text-[3vmin] sm:text-[2vmin]">Get a play pass for each friends</p>
+                        </div>
+                        <p className=" text-white text-[4vmin] sm:text-[2.7vmin]">1 friends / 2000 MANA</p>
                     </div>
-                    <div className="flex flex-col gap-0 items-center">
-                        <p className=" text-white text-[4vmin] sm:text-[3vmin]">Share your invitation link</p>
-                        <p className=" text-white text-[3.3vmin] sm:text-[2.2vmin]">Get a play pass for each friends</p>
-                    </div>
-                    <div className="flex flex-col gap-0 items-center">
-                        <p className=" text-white text-[4vmin] sm:text-[3vmin]">Your friends join YBDBD</p>
-                        <p className=" text-white text-[3.3vmin] sm:text-[2.2vmin]">Get a play pass for each friends</p>
-                    </div>
-                    <p className=" text-white text-[5vmin] sm:text-[3.3vmin]">1 friends / 2000 N2O</p>
-                    <div onClick={handleCopyClick} className="w-[34vmax] sm:w-[30vmin] aspect-[266/44] relative active:scale-90 transition-transform duration-100 ">
-                        <Image
-                            src="/image/invite_btn.png"
-                            alt="main logo"
-                            layout="fill"
-                            objectFit="cover"
-                        />
+                    <div onClick={handleCopyClick} className="w-full flex justify-center gap-[3%] relative active:scale-90 transition-transform duration-100 ">
+                        <div className="w-[60%] aspect-[317/38] relative">
+                            <p className=" absolute text-[#FFD37E] text-[5vmin] sm:text-[2vmin] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10">Invite a friend</p>
+                            <Image
+                                src="/image/invitebtn.png"
+                                alt="main logo"
+                                layout="fill"
+                                objectFit="fill"
+                            />
+                        </div>
+                        <div className="w-[28%] rounded-md h-full border border-[#FFD37E] font-bold text-[#FFD37E] text-center">Copy link</div>
                     </div>
                 </div>
             </motion.div>

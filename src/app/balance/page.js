@@ -55,7 +55,7 @@ export default function Balance() {
   useEffect(() => {
     // tickets 상태가 변경될 때만 실행
     window.dispatchEvent(new Event(TICKETS_UPDATE_EVENT)); // footer에 ticket 값 변경 알림
-}, [tickets]);  // tickets 상태가 변경될 때만 실행
+  }, [tickets]);  // tickets 상태가 변경될 때만 실행
 
   return (
     <AnimatePresence mode="wait">
@@ -66,61 +66,51 @@ export default function Balance() {
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
       >
-        <div className=" w-full h-full max-w-[500px] relative flex flex-col justify-end pb-[10vmax] sm:pb-[3vmax] bg-cover bg-no-repeat " >
-          <div className=" bg-mainRed w-full py-[5vmax] flex justify-center items-center absolute top-0">
-            <div className="w-[30vmax] max-w-[295px] aspect-[295/183] relative ">
+        <div className="bg-balanceBg w-full h-full max-w-[500px] relative flex flex-col justify-evenly " >
+          <div className=" w-full flex justify-center items-center relative mb-[5%]">
+            <div className="w-[35vmax] max-w-[450px] aspect-[515/458] relative ">
               <Image
-                src="/image/fnfsLogo.png"
+                src="/image/balancelogo.png"
                 alt="main logo"
                 layout="fill"
                 objectFit="cover"
               />
             </div>
-            <div className=" flex justify-center gap-[5%] w-full absolute bottom-[-11%] sm:bottom-[-9%]">
-              <div className=" w-[145px] sm:w-[15vmax] aspect-[145/59] relative">
+            <div className=" flex justify-center w-full absolute bottom-[-11%] sm:bottom-[-9%]">
+              <div className=" w-[80%] aspect-[483/122] relative">
                 <Image
-                  src="/image/fnfs_ticket.png"
+                  src="/image/resourceinfo.png"
                   alt="ticketIcon"
                   layout="fill"
                   objectFit="cover"
                 />
-                <p className=" absolute right-[10%] top-0 text-white text-[2.2vmax] sm:text-[2.2vmin]">Tickets</p>
-                <p className=" absolute right-[10%] bottom-0 text-white text-[2.2vmax] sm:text-[2.2vmin]">{tickets}</p>
-              </div>
-              <div className=" w-[132px] sm:w-[15vmax] aspect-[132/59] relative">
-                <Image
-                  src="/image/fnfs_n2o.png"
-                  alt="meatIcon"
-                  layout="fill"
-                  objectFit="cover"
-                />
-                <p className=" absolute right-[10%] top-0 text-white text-[2.2vmax] sm:text-[2.2vmin]">N2O</p>
-                <p className=" absolute right-[10%] bottom-0 text-white text-[2.2vmax] sm:text-[2.2vmin]">{n2o}</p>
+                <p className="mt-[2px] absolute right-[18%] top-1/2 -translate-y-1/2 text-white text-[3vmax] sm:text-[2.2vmin] [-webkit-text-stroke:0.5px_black]">{n2o >= 1000000 ? `${n2o / 1000000}m` : n2o >= 1000 ? `${n2o / 1000}k` : n2o}</p>
+                <p className="mt-[2px] absolute left-[25%] top-1/2 -translate-y-1/2 text-white text-[3vmax] sm:text-[2.2vmin] [-webkit-text-stroke:0.5px_black]">{tickets}</p>
               </div>
             </div>
           </div>
-          <p className="w-full text-center text-[6vmax] sm:text-[6vmin] -rotate-2
-        bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent [-webkit-text-stroke:1px_black] ">Get Ticket</p>
+          <p className="w-full text-center text-[5vmax] sm:text-[5vmin] -rotate-2
+        bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent [-webkit-text-stroke:1px_black] ">Get Magic Water</p>
           <div className=" w-full py-[1vmin] flex gap-3 flex-col items-center justify-center">
-            <div onClick={() => getTicket(1, 500)} className=" w-[36vmax] sm:w-[40vmin] aspect-[479/117] relative active:scale-90 transition-transform duration-200 ">
+            <div onClick={() => getTicket(1, 500)} className=" w-[36vmax] sm:w-[40vmin] aspect-[486/146] relative active:scale-90 transition-transform duration-200 ">
               <Image
-                src="/image/fnfs_ticket1.png"
+                src="/image/water1.png"
                 alt="meatIcon"
                 layout="fill"
                 objectFit="cover"
               />
             </div>
-            <div onClick={() => getTicket(3, 1300)} className="w-[36vmax] sm:w-[40vmin] aspect-[479/117] relative active:scale-90 transition-transform duration-200 ">
+            <div onClick={() => getTicket(3, 1300)} className="w-[36vmax] sm:w-[40vmin] aspect-[486/146] relative active:scale-90 transition-transform duration-200 ">
               <Image
-                src="/image/fnfs_ticket2.png"
+                src="/image/water2.png"
                 alt="meatIcon"
                 layout="fill"
                 objectFit="cover"
               />
             </div>
-            <div onClick={() => getTicket(5, 2000)} className="w-[36vmax] sm:w-[40vmin] aspect-[479/117] relative active:scale-90 transition-transform duration-200 ">
+            <div onClick={() => getTicket(5, 2000)} className="w-[36vmax] sm:w-[40vmin] aspect-[486/146] relative active:scale-90 transition-transform duration-200 ">
               <Image
-                src="/image/fnfs_ticket3.png"
+                src="/image/water3.png"
                 alt="meatIcon"
                 layout="fill"
                 objectFit="cover"

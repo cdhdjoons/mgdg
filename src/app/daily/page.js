@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 
 export default function DailyTask() {
     //task list 버튼 관리
-    const [disabledTask, setDisabledTask] = useState([true, true, true, true]);
+    const [disabledTask, setDisabledTask] = useState([true, true]);
     //daily reward 관리
     const [disabledDaily, setDisabledDaily] = useState([true, true]);
+    //1/24 표시 관리
+    const [remainHours, setRemainHours] = useState(null);
 
 
     useEffect(() => {
@@ -20,6 +22,11 @@ export default function DailyTask() {
         const lastUpdateDaily = localStorage.getItem("last_update_day1"); //daily
         const lastUpdateRetweet = localStorage.getItem("last_update_day2"); //retweet
         const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD 형식
+        // 현재 시간만 표시
+        const nowTime = new Date();
+        const nowHours = nowTime.getHours();
+        // 현재 시간 표시
+        setRemainHours(24 - nowHours);
 
         setDisabledDaily(prev => [
             lastUpdateDaily === today ? false : true,
@@ -54,24 +61,33 @@ export default function DailyTask() {
     };
 
     //task list 링크 
-    const links = ['https://x.com/Fnfs_Official', '#', 'https://t.me/fnfs_official', '/invite']
+    const links = ['https://x.com/Fnfs_Official', '/invite']
 
     return (
         <AnimatePresence mode="wait">
-            <motion.div className={`${franklinGothic.variable} font-franklin w-full h-full`}
+            <motion.div className={` w-full h-full bg-balanceBg`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
                 <div className=" w-full h-full max-w-[500px] relative flex flex-col justify-evenly items-center bg-cover bg-no-repeat " >
-                    <div className="w-full h-[15%] bg-cover bg-no-repeat flex justify-center absolute top-0 " style={{ backgroundImage: `url(/image/side_bg.png)` }}></div>
-                    <div className={` w-[30vmax] max-w-[500px] relative `} >
-                        <p className="w-full text-center text-[5vmax] sm:text-[4vmin] -rotate-2
-        bg-gradient-to-r from-[#F92F2F] via-[#FEA5A5] to-[#EB1515] bg-clip-text text-transparent [-webkit-text-stroke:1px_black] ">Daily Task</p>
+                    <div className={` max-w-[500px] relative `} >
+                        <p className="w-full text-center text-[7vmax] sm:text-[6vmin] -rotate-2
+        bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent [-webkit-text-stroke:0.6px_black] ">Mystic Task</p>
                     </div>
-                    <div className=" w-full flex flex-col items-start gap-[5vmin]">
-                        {disabledDaily[0] ? <div onClick={() => dailyHandleClick(0, 100)} className="w-[78vmin] sm:w-[22vmax] aspect-[518/105] relative active:scale-90 transition-transform duration-200">
+                    <div className=" w-full flex flex-col items-center relative ">
+                        <div className=" w-[36vmax] sm:w-[22vmax] aspect-[480/125] relative">
+                            <Image
+                                src="/image/taskinfo.png"
+                                alt="main logo"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                            <p className="absolute top-[18%] left-[8%] text-[2.6vmax] text-[#D0D0D0] font-bold">DAILY TASK</p>
+                            <p className="absolute bottom-[5%] right-[8%] text-[2vmax] text-[#D0D0D0] font-bold">{remainHours}/24h</p>
+                        </div>
+                        {disabledDaily[0] ? <div onClick={() => dailyHandleClick(0, 100)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                             <Image
                                 src="/image/dailyreward1.png"
                                 alt="main logo"
@@ -79,7 +95,7 @@ export default function DailyTask() {
                                 objectFit="cover"
                             />
                         </div> :
-                            <div className="w-[78vmin] sm:w-[22vmax] aspect-[518/105] relative active:scale-90 transition-transform duration-200">
+                            <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                                 <Image
                                     src="/image/dailyreward1_off.png"
                                     alt="main logo"
@@ -87,8 +103,8 @@ export default function DailyTask() {
                                     objectFit="cover"
                                 />
                             </div>}
-                        {disabledDaily[1] ? <a href="https://x.com/Fnfs_Official" target="_blank" rel="noopener noreferrer">
-                            <div onClick={() => dailyHandleClick(1, 1000)} className="w-[80vmin] sm:w-[22vmax] aspect-[520/105] relative active:scale-90 transition-transform duration-200">
+                        {disabledDaily[1] ?
+                            <div onClick={() => dailyHandleClick(1, 1000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                                 <Image
                                     src="/image/dailyreward2.png"
                                     alt="main logo"
@@ -96,8 +112,8 @@ export default function DailyTask() {
                                     objectFit="cover"
                                 />
                             </div>
-                        </a> :
-                            <div className="w-[80vmin] sm:w-[22vmax] aspect-[520/105] relative active:scale-90 transition-transform duration-200">
+                            :
+                            <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                                 <Image
                                     src="/image/dailyreward2_off.png"
                                     alt="main logo"
@@ -106,72 +122,71 @@ export default function DailyTask() {
                                 />
                             </div>
                         }
+                        <div className="absolute bottom-0 w-[38vmax] aspect-[480/75]">
+                            <Image
+                                src="/image/taskpartition.png"
+                                alt="main logo"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
                     </div>
-                    <div className="w-[30vmax] max-w-[500px] relative ">
-                        <p className="w-full text-center text-[5vmax] sm:text-[4vmin] -rotate-2
-        bg-gradient-to-r from-[#2F80F9] via-[#A5D3FE] to-[#1527EB] bg-clip-text text-transparent [-webkit-text-stroke:1px_black] ">Task List</p>
-                    </div>
-                    <div className=" w-full flex flex-col items-start gap-[5vmin]">
-                        {[...Array(4)].map((_, index) => (
-                            disabledTask[index] ? (
-                                links[index] !== "#" ? (  // 2번째 버튼은 <a> 태그 없이 렌더링
-                                    index !== 3 ? (
-                                        <a key={index} href={links[index]} target="_blank" rel="noopener noreferrer">
-                                            <div
-                                                onClick={() => handleClick(index, 1000)}
-                                                className="w-[79vmin] sm:w-[23vmax] aspect-[520/108] relative active:scale-90 transition-transform duration-200"
-                                            >
-                                                <Image
-                                                    src={`/image/follow${index + 1}.png`}
-                                                    alt={`button ${index + 1}`}
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                />
-                                            </div>
-                                        </a>
-                                    ) : (
-                                        <Link key={index} href={links[index]}>
-                                            <div
-                                                onClick={() => handleClick(index, 5000)}
-                                                className="w-[79vmin] sm:w-[23vmax] aspect-[520/108] relative active:scale-90 transition-transform duration-200"
-                                            >
-                                                <Image
-                                                    src={`/image/follow${index + 1}.png`}
-                                                    alt={`button ${index + 1}`}
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                />
-                                            </div>
-                                        </Link>
-                                    )
-                                ) : (
-                                    <div
-                                        key={index}
-                                        onClick={(e) => e.preventDefault()} // 클릭해도 아무 동작 안 함
-                                        className="w-[79vmin] sm:w-[23vmax] aspect-[520/108] relative active:scale-90 transition-transform duration-200"
-                                    >
-                                        <Image
-                                            src={`/image/follow${index + 1}.png`}
-                                            alt={`button ${index + 1}`}
-                                            layout="fill"
-                                            objectFit="cover"
-                                        />
-                                    </div>
-                                )
-                            ) : (
-                                <div
-                                    key={index}
-                                    className="w-[79vmin] sm:w-[23vmax] aspect-[520/108] relative active:scale-90 transition-transform duration-200"
-                                >
-                                    <Image
-                                        src={`/image/usedfollow${index + 1}.png`}
-                                        alt={`disabled button ${index + 1}`}
-                                        layout="fill"
-                                        objectFit="cover"
-                                    />
-                                </div>
-                            )
-                        ))}
+
+                    <div className=" w-full flex flex-col items-center relative">
+                        <div className=" w-[36vmax] sm:w-[22vmax] aspect-[480/125] relative">
+                            <Image
+                                src="/image/taskinfo2.png"
+                                alt="main logo"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                            <p className="absolute top-[18%] left-[8%] text-[2.6vmax] text-[#D0D0D0] font-bold">OPTION TASK</p>
+
+                        </div>
+                        {disabledTask[0] ? <div onClick={() => handleClick(0, 1000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                            <Image
+                                src="/image/taskx.png"
+                                alt="main logo"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div> :
+                            <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                                <Image
+                                    src="/image/taskx_off.png"
+                                    alt="main logo"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div>}
+                        {disabledTask[1] ?
+                            <div onClick={() => handleClick(1, 5000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                                <Image
+                                    src="/image/taskinvite.png"
+                                    alt="main logo"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div>
+                            :
+                            <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                                <Image
+                                    src="/image/taskinvite_off.png"
+                                    alt="main logo"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div>
+                        }
+                        <div className="absolute bottom-0 w-[38vmax] aspect-[480/75]">
+                            <Image
+                                src="/image/taskpartition.png"
+                                alt="main logo"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
+
                     </div>
                 </div>
             </motion.div>

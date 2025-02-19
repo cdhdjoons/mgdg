@@ -12,6 +12,7 @@ export default {
         foreground: "var(--foreground)",
         mainRed: 'rgb(160, 0, 0, 0.8)',
         footerBg: 'rgb(0, 0, 0, 0.5)',
+        balanceBg: 'rgb(0, 0, 0, 0.7)',
       },
       fontFamily: {
         franklin: ["var(--font-franklin-gothic)", "sans-serif"],
