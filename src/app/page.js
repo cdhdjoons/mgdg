@@ -18,17 +18,19 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full flex justify-center items-center relative">
-          <div className="w-[35vmax] max-w-[450px] flex items-center aspect-[478/62] relative active:scale-95 transition-transform duration-100 ">
-            <Image
-              src="/image/joinbtn.png"
-              alt="main logo"
-              fill
-              style={{ objectFit: "cover" }}
-              priority
-            />
-            <p className="w-full text-center text-[1.6vmax] sm:text-[2vmin] -rotate-0
+          <a href="https://x.com/MSDG_official" target="_blank" rel="noopener noreferrer">
+            <div className="w-[35vmax] max-w-[450px] flex items-center aspect-[478/62] relative active:scale-95 transition-transform duration-100 ">
+              <Image
+                src="/image/joinbtn.png"
+                alt="main logo"
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+              />
+              <p className="w-full text-center text-[1.6vmax] sm:text-[2vmin] -rotate-0
         bg-gradient-to-r from-[#C09645] via-[#FFC977] to-[#C09645] bg-clip-text text-transparent ">To Earn Coin, Join in Twitter</p>
-          </div>
+            </div>
+          </a>
         </div>
         <ClaimTimer />
       </div>

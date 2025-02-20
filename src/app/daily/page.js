@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { franklinGothic } from "../../../styles/fonts";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function DailyTask() {
+    const router = useRouter(); // useRouter로 router 객체 가져오기
     //task list 버튼 관리
     const [disabledTask, setDisabledTask] = useState([true, true]);
     //daily reward 관리
@@ -28,7 +29,7 @@ export default function DailyTask() {
         const nowHours = new Date().getHours();
         //invite 카운트 가져오기
         const savedCount = localStorage.getItem("clickCount");
-
+        console.log(nowHours);
         setRemainHours(24 - nowHours);
 
         setDisabledDaily([
@@ -59,8 +60,23 @@ export default function DailyTask() {
 
     // task list 버튼 클릭 시 상태 업데이트 및 저장
     const handleClick = (index, reward) => {
-        if (index === 1 && inviteCount < 4) {
-            setInviteCount((prev) => prev + 1);
+        if (index === 1 && inviteCount < 5) {
+            setInviteCount((prev) => {
+                const newCount = prev + 1;
+                localStorage.setItem("clickCount", newCount);
+                // ✅ inviteCount가 4에서 5로 증가할 때 즉시 실행
+                if (newCount === 5) {
+                    setDisabledTask((prev) => {
+                        const newState = [...prev];
+                        newState[1] = false;
+                        localStorage.setItem("DisabledTask", JSON.stringify(newState));
+                        return newState;
+                    });
+                }
+                return newCount;
+            });
+            // 이동을 위한 타이머를 설정
+            router.push("/invite");
         } else {
             const nowN2O = Number(localStorage.getItem("n2o"));
             setDisabledTask((prev) => {
@@ -73,9 +89,9 @@ export default function DailyTask() {
         }
     };
     //invite카운트 변화 있을때만 로컬에 저장
-    useEffect(() => {
-        localStorage.setItem("clickCount", inviteCount);
-    }, [inviteCount])
+    // useEffect(() => {
+    //     localStorage.setItem("clickCount", inviteCount);
+    // }, [inviteCount])
 
     //task list 링크 
     const links = ['https://x.com/Fnfs_Official', '/invite']
@@ -121,14 +137,16 @@ export default function DailyTask() {
                                 />
                             </div>}
                         {disabledDaily[1] ?
-                            <div onClick={() => dailyHandleClick(1, 1000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
-                                <Image
-                                    src="/image/dailyreward2.png"
-                                    alt="main logo"
-                                    layout="fill"
-                                    objectFit="cover"
-                                />
-                            </div>
+                            <a href="https://x.com/MSDG_official" target="_blank" rel="noopener noreferrer">
+                                <div onClick={() => dailyHandleClick(1, 1000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                                    <Image
+                                        src="/image/dailyreward2.png"
+                                        alt="main logo"
+                                        layout="fill"
+                                        objectFit="cover"
+                                    />
+                                </div>
+                            </a>
                             :
                             <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                                 <Image
@@ -160,14 +178,15 @@ export default function DailyTask() {
                             <p className="absolute top-[18%] left-[8%] text-[2.6vmax] text-[#D0D0D0] font-bold">OPTION TASK</p>
 
                         </div>
-                        {disabledTask[0] ? <div onClick={() => handleClick(0, 1000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
-                            <Image
-                                src="/image/taskx.png"
-                                alt="main logo"
-                                layout="fill"
-                                objectFit="cover"
-                            />
-                        </div> :
+                        {disabledTask[0] ? <a href="https://x.com/MSDG_official" target="_blank" rel="noopener noreferrer">
+                            <div onClick={() => handleClick(0, 1000)} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                                <Image
+                                    src="/image/taskx.png"
+                                    alt="main logo"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div></a> :
                             <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                                 <Image
                                     src="/image/taskx_off.png"

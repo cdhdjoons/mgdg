@@ -44,7 +44,7 @@
 /* 500px 이상일 때 background-size 변경 */
 @media (min-width: 500px) {
   .scroll-container::-webkit-scrollbar-thumb {
-    background-size: 120% 100%; /* fill 효과 */
+    background-size: 100% 100%; /* fill 효과 */
   }
 }
 
