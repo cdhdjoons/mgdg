@@ -4,6 +4,7 @@ import '../../../styles/leaderboard.css';
 import { franklinGothic } from "../../../styles/fonts";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion';
+import rankerDb from "../db/rankerdb";
 
 export default function LeaderBoard() {
     const rankerData = [
@@ -102,7 +103,7 @@ export default function LeaderBoard() {
                      bg-[length:100%_100%] bg-no-repeat " style={{ backgroundImage: `url(/image/inviteinfo.png)` }}>
                         <div className="scroll-container w-[85%] h-[95%] flex flex-col gap-3 overflow-scroll overflow-x-hidden">
 
-                            {rankerData.map((ranker, index) => (
+                            {rankerDb.map((ranker, index) => (
                                 <div key={ranker.name} className="w-full flex justify-stretch items-center " >
                                     <div className=" relative w-[20%] aspect-[77/77]">
                                         <Image
@@ -112,9 +113,9 @@ export default function LeaderBoard() {
                                             objectFit="cover"
                                         />
                                     </div>
-                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4.2vmin] sm:text-[2.3vmin]">{ranker.name.length > 6 ? `${ranker.name.slice(0, 5)}···` : ranker.name}</p>
-                                    <p className=" flex-1 text-center text-[#FFD37E] text-[5vmin] sm:text-[2.3vmin]">{`00${index + 1}`}</p>
-                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4vmin] sm:text-[1.6vmin]">{ranker.n2o}</p>
+                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4.2vmin] sm:text-[2.3vmin]">{ranker.name}</p>
+                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4vmin] sm:text-[1.6vmin]">{ranker.score}</p>
+                                    <p className=" flex-1 text-center text-[#FFD37E] text-[5vmin] sm:text-[2.3vmin]">{index > 8 ? `0${index + 1}` :`00${index + 1}`}</p>
                                 </div>
                             ))}
 

@@ -13,6 +13,8 @@ export default function DailyTask() {
     const [disabledDaily, setDisabledDaily] = useState([true, true]);
     //1/24 표시 관리
     const [remainHours, setRemainHours] = useState(null);
+    //invite 버튼 5번 클릭 시 포인트 지급 및 비활성화 관리
+    const [inviteCount, setInviteCount] = useState(0);
 
 
     useEffect(() => {
@@ -22,19 +24,24 @@ export default function DailyTask() {
         const lastUpdateDaily = localStorage.getItem("last_update_day1"); //daily
         const lastUpdateRetweet = localStorage.getItem("last_update_day2"); //retweet
         const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD 형식
-        // 현재 시간만 표시
-        const nowTime = new Date();
-        const nowHours = nowTime.getHours();
         // 현재 시간 표시
+        const nowHours = new Date().getHours();
+        //invite 카운트 가져오기
+        const savedCount = localStorage.getItem("clickCount");
+
         setRemainHours(24 - nowHours);
 
-        setDisabledDaily(prev => [
-            lastUpdateDaily === today ? false : true,
+        setDisabledDaily([
+            lastUpdateDaily !== today,
             lastUpdateRetweet === today ? false : true
         ]);
 
         if (storedState) {
             setDisabledTask(JSON.parse(storedState));
+        }
+
+        if (savedCount) {
+            setInviteCount(Number(savedCount));
         }
     }, []);
 
@@ -52,13 +59,23 @@ export default function DailyTask() {
 
     // task list 버튼 클릭 시 상태 업데이트 및 저장
     const handleClick = (index, reward) => {
-        const newState = [...disabledTask];
-        const nowN2O = Number(localStorage.getItem("n2o"));
-        newState[index] = false; // 클릭된 버튼 비활성화
-        setDisabledTask(newState);
-        localStorage.setItem("DisabledTask", JSON.stringify(newState)); // localStorage에 저장
-        localStorage.setItem("n2o", nowN2O + reward);
+        if (index === 1 && inviteCount < 4) {
+            setInviteCount((prev) => prev + 1);
+        } else {
+            const nowN2O = Number(localStorage.getItem("n2o"));
+            setDisabledTask((prev) => {
+                const newState = [...prev];
+                newState[index] = false; // 클릭된 버튼 비활성화
+                localStorage.setItem("DisabledTask", JSON.stringify(newState)); // localStorage에 저장
+                return newState;
+            });
+            localStorage.setItem("n2o", nowN2O + reward);
+        }
     };
+    //invite카운트 변화 있을때만 로컬에 저장
+    useEffect(() => {
+        localStorage.setItem("clickCount", inviteCount);
+    }, [inviteCount])
 
     //task list 링크 
     const links = ['https://x.com/Fnfs_Official', '/invite']
@@ -122,7 +139,7 @@ export default function DailyTask() {
                                 />
                             </div>
                         }
-                        <div className="absolute bottom-0 w-[38vmax] aspect-[480/75]">
+                        <div className="absolute bottom-0 w-[38vmax] max-w-[450px] aspect-[480/75]">
                             <Image
                                 src="/image/taskpartition.png"
                                 alt="main logo"
@@ -167,6 +184,7 @@ export default function DailyTask() {
                                     layout="fill"
                                     objectFit="cover"
                                 />
+                                <p className="absolute bottom-[5%] right-[5%] text-[2.5vmax] sm:text-[1.5vmin] text-[#D0D0D0] font-bold">{inviteCount}/5</p>
                             </div>
                             :
                             <div className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
@@ -176,9 +194,10 @@ export default function DailyTask() {
                                     layout="fill"
                                     objectFit="cover"
                                 />
+                                <p className="absolute bottom-[5%] right-[5%] text-[2.5vmax] sm:text-[1.5vmin] text-[#D0D0D0] font-bold">5/5</p>
                             </div>
                         }
-                        <div className="absolute bottom-0 w-[38vmax] aspect-[480/75]">
+                        <div className="absolute bottom-0 w-[38vmax] max-w-[450px] aspect-[480/75]">
                             <Image
                                 src="/image/taskpartition.png"
                                 alt="main logo"
