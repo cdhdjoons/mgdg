@@ -4,7 +4,7 @@ import '../../../styles/leaderboard.css';
 import { franklinGothic } from "../../../styles/fonts";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from 'framer-motion';
-import rankerDb from "../db/rankerdb";
+import rankerDb from "../db/rankerDb";
 
 export default function LeaderBoard() {
     const rankerData = [
