@@ -1,10 +1,10 @@
 {
-	"name": "Crazy Car",
-	"short_name": "Crazy Car",
-	"description": "Crazy Car is a topdown race game",
+	"name": "puzzlelegends",
+	"short_name": "puzzlelegends",
+	"description": "",
 	"start_url": "index.html",
 	"display": "fullscreen",
-	"orientation": "any",
+	"orientation": "portrait",
 	"background_color": "#ffffff",
 	"icons": [
 		{
@@ -18,8 +18,8 @@
 			"type": "image/png"
 		},
 		{
-			"src": "icons/icon-114.png",
-			"sizes": "114x114",
+			"src": "icons/icon-64.png",
+			"sizes": "64x64",
 			"type": "image/png"
 		},
 		{
@@ -30,6 +30,11 @@
 		{
 			"src": "icons/icon-256.png",
 			"sizes": "256x256",
+			"type": "image/png"
+		},
+		{
+			"src": "icons/icon-512.png",
+			"sizes": "512x512",
 			"type": "image/png"
 		}
 	],

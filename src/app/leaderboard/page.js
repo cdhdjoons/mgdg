@@ -112,9 +112,9 @@ export default function LeaderBoard() {
                                             objectFit="cover"
                                         />
                                     </div>
-                                    <p className="  text-[#FFD37E] text-[4.2vmin] sm:text-[2.3vmin]">{ranker.name.length > 6 ? `${ranker.name.slice(0, 5)}···` : ranker.name}</p>
-                                    <p className="  text-[#FFD37E] text-[5vmin] sm:text-[2.3vmin]">{`00${index + 1}`}</p>
-                                    <p className="  text-[#FFD37E] text-[4vmin] sm:text-[1.6vmin]">{ranker.n2o}</p>
+                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4.2vmin] sm:text-[2.3vmin]">{ranker.name.length > 6 ? `${ranker.name.slice(0, 5)}···` : ranker.name}</p>
+                                    <p className=" flex-1 text-center text-[#FFD37E] text-[5vmin] sm:text-[2.3vmin]">{`00${index + 1}`}</p>
+                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4vmin] sm:text-[1.6vmin]">{ranker.n2o}</p>
                                 </div>
                             ))}
 

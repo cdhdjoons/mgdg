@@ -85,7 +85,7 @@ export default function Balance() {
                   objectFit="cover"
                 />
                 <p className="mt-[2px] absolute right-[18%] top-1/2 -translate-y-1/2 text-white text-[3vmax] sm:text-[2.2vmin] [-webkit-text-stroke:0.5px_black]">{n2o >= 1000000 ? `${n2o / 1000000}m` : n2o >= 1000 ? `${n2o / 1000}k` : n2o}</p>
-                <p className="mt-[2px] absolute left-[25%] top-1/2 -translate-y-1/2 text-white text-[3vmax] sm:text-[2.2vmin] [-webkit-text-stroke:0.5px_black]">{tickets}</p>
+                <p className="mt-[2px] absolute left-[25%] top-1/2 -translate-y-1/2 text-white text-[3vmax] sm:text-[2.2vmin] [-webkit-text-stroke:0.4px_black]">{tickets}</p>
               </div>
             </div>
           </div>
