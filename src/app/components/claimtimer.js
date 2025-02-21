@@ -62,7 +62,7 @@ export default function ClaimTimer() {
         };
     }, []);
 
-    const startInterval = (initialTime) => {
+    const startInterval = () => {
         if (timerRef.current) {
             clearInterval(timerRef.current);
         }
@@ -91,12 +91,12 @@ export default function ClaimTimer() {
         setTime(TIMER_DURATION);
         hasFinished.current = false;
         localStorage.setItem("timerStartTime", Date.now().toString());
-        startInterval(TIMER_DURATION);
+        startInterval();
     };
 
     const handleN2O = () => {
         const currentN2O = localStorage.getItem("n2o");
-        const newN2O = (Number(currentN2O) || 0) + 1000; // 🔥 기존 값에 1000 더함
+        const newN2O = (Number(currentN2O) || 0) + 2000; // 🔥 기존 값에 1000 더함
         localStorage.setItem("n2o", newN2O); // 🔥 업데이트된 값 저장
         setN2O(newN2O); // 🔥 상태 업데이트
 

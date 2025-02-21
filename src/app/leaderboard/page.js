@@ -7,26 +7,26 @@ import { AnimatePresence, motion } from 'framer-motion';
 import rankerDb from "../db/rankerDb";
 
 export default function LeaderBoard() {
-    const rankerData = [
-        { name: "Cd**n", n2o: '5.6B' },
-        { name: "hk**k", n2o: '5.1B' },
-        { name: "Le**n", n2o: '4.5B' },
-        { name: "jq**r", n2o: '4.0B' },
-        { name: "Ra**3", n2o: '3.7B' },
-        { name: "LU**4", n2o: '3.65B' }
-    ]
+    
     const [n2o, setN2O] = useState(0);
     const [teleId, setTeleId] = useState('unknown');
     const [rank, setRank] = useState(0);
-
+    //홀더 숫자 상승 
+    const [holderCount, setHolderCount] = useState(145.5);
 
     useEffect(() => {
         // 초기 n2o 값 불러오기
         const storedN2O = localStorage.getItem("n2o");
+        const baseDate = new Date("2025-02-19").getTime(); // 기준 날짜
+        const now = Date.now(); // 현재 시간
+        const twoDays = 1000 * 60 * 60 * 24 * 2; // 2일을 밀리초로
+        const dayCount = Math.floor((now - baseDate) / twoDays);
 
         if (storedN2O !== null) {
             setN2O(Number(storedN2O));
         }
+        setHolderCount(holderCount + (dayCount / 10));
+        console.log(dayCount);
     }, []);
 
     //랭킹 순위
@@ -57,7 +57,7 @@ export default function LeaderBoard() {
 
         checkTelegramSDK(); // 초기 실행
     }, []);
-    console.log('its id!', teleId);
+    // console.log('its id!', teleId);
     return (
         <AnimatePresence mode="wait">
             <motion.div className=" w-full h-full bg-balanceBg"
@@ -98,7 +98,7 @@ export default function LeaderBoard() {
                         </div>
                     </div>
                     <p className="w-full text-center text-[4vmax] sm:text-[6vmin] -rotate-2
-        bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent font-bold [-webkit-text-stroke:0.4px_black] ">145.5k Holders</p>
+        bg-gradient-to-r from-[#F9BC2F] via-[#FED9A5] to-[#EB9F15] bg-clip-text text-transparent font-bold [-webkit-text-stroke:0.4px_black] ">{holderCount}k Holders</p>
                     <div className="  w-[90%] py-3 flex justify-center items-center max-h-[30vmax] sm:max-h-[500px] 
                      bg-[length:100%_100%] bg-no-repeat " style={{ backgroundImage: `url(/image/inviteinfo.png)` }}>
                         <div className="scroll-container w-[85%] h-[95%] flex flex-col gap-3 overflow-scroll overflow-x-hidden">
@@ -113,7 +113,7 @@ export default function LeaderBoard() {
                                             objectFit="cover"
                                         />
                                     </div>
-                                    <p className=" flex-1 text-center text-[#FFD37E] text-[4.2vmin] sm:text-[2.3vmin]">{ranker.name}</p>
+                                    <p className=" w-[45%] text-center text-[#FFD37E] text-[4.2vmin] sm:text-[2.3vmin]">{ranker.name}</p>
                                     <p className=" flex-1 text-center text-[#FFD37E] text-[4vmin] sm:text-[1.6vmin]">{ranker.score}</p>
                                     <p className=" flex-1 text-center text-[#FFD37E] text-[5vmin] sm:text-[2.3vmin]">{index > 8 ? `0${index + 1}` :`00${index + 1}`}</p>
                                 </div>
