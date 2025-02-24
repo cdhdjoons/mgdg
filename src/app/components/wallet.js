@@ -68,9 +68,9 @@ export default function Wallet() {
             >
                 {onWallet ? <div className="absolute top-[10px] z-[999]"><Alert severity="success">Connect Wallet Complete.</Alert></div> : ''}
                 {disabledWalletTask ?
-                    <div onClick={connectWallet} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                    <div  className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                         <Image
-                            src="/image/taskconnect.png"
+                            src="/image/taskconnect_off.png"
                             alt="main logo"
                             layout="fill"
                             objectFit="cover"
