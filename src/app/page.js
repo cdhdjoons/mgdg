@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ClaimTimer from "./components/claimtimer";
 
+
 export default function Home() {
   return (
     <div className=" w-full h-full">
@@ -33,6 +34,7 @@ export default function Home() {
           </a>
         </div>
         <ClaimTimer />
+        
       </div>
     </div>
   );

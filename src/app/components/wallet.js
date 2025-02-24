@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from "react";
 import { getTonConnectInstance } from "../../../utils/tonConnect";
+import { TonConnectUI } from "@tonconnect/ui";
 import Alert from '@mui/material/Alert';
 
 export default function Wallet() {
@@ -12,6 +13,7 @@ export default function Wallet() {
     const [disabledWalletTask, setDisabledWalletTask] = useState(true);
     //wallet address 존재여부
     const [onWallet, setOnWallet] = useState(false);
+    const [test, setTest] = useState(false);
 
 
     //  TON Connect 인스턴스 설정
@@ -35,7 +37,17 @@ export default function Wallet() {
     //connect wallet 함수
     const connectWallet = async () => {
         try {
-            await tonConnect.connect();
+            if (!tonConnect) {
+                console.error("TonConnect instance is not initialized.");
+                return;
+            }
+            console.log("Connecting to wallet...");
+            const connection = await tonConnect.connect();
+            if (!connection) {
+                console.error("Connection failed, no response.");
+                return;
+            }
+            console.log("Connected:", connection);
 
             await getWalletAddress(); // ✅ 연결 후 주소 가져오기
         } catch (error) {
@@ -58,8 +70,12 @@ export default function Wallet() {
         }
     };
 
+    const openTon = () => {
+        setTest(true);
+    }
     return (
         <AnimatePresence mode="wait">
+
             <motion.div className={` `}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -68,9 +84,9 @@ export default function Wallet() {
             >
                 {onWallet ? <div className="absolute top-[10px] z-[999]"><Alert severity="success">Connect Wallet Complete.</Alert></div> : ''}
                 {disabledWalletTask ?
-                    <div  className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
+                    <div onClick={connectWallet} className="w-[38vmax] sm:w-[22vmax] aspect-[489/147] relative active:scale-90 transition-transform duration-200">
                         <Image
-                            src="/image/taskconnect_off.png"
+                            src="/image/taskconnect.png"
                             alt="main logo"
                             layout="fill"
                             objectFit="cover"
@@ -86,7 +102,10 @@ export default function Wallet() {
                         />
                     </div>
                 }
+
             </motion.div>
+
+
         </AnimatePresence>
     );
 }
