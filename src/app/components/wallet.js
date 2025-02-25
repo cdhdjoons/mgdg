@@ -33,6 +33,10 @@ export default function Wallet() {
             setDisabledWalletTask(!!wallet);
 
             if (wallet) {
+                const storedWalletTask = localStorage.getItem("DisabledWalletTask");
+                if (storedWalletTask !== null) {
+                    return
+                }
                 const nowN2O = Number(localStorage.getItem("n2o")) || 0;
                 setDisabledWalletTask(true);
                 setOnWallet(true);
@@ -47,12 +51,12 @@ export default function Wallet() {
 
     //connect wallet 함수
     const connectWallet = async () => {
-        if(disabledWalletTask) {
+        if (disabledWalletTask) {
             tonConnectUI.disconnect();
         } else {
             tonConnectUI.openModal();
         }
-       
+
     };
 
     return (
