@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
       <body className={`bg-black flex justify-center min-h-dvh m-0 p-0 ${elMessiri.className}`} >
         <div className=" w-full max-w-[500px] max-h-[1080px] bg-cover bg-no-repeat relative flex flex-col justify-between overflow-hidden"
           style={{ backgroundImage: `url(/image/bg_mdgd.png)` }}>
-          {children}
+            {children}
           <Analytics />
           <SpeedInsights />
           <ClientOnlyWrapper />

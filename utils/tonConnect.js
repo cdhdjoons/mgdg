@@ -13,5 +13,4 @@ export const getTonConnectInstance = () => {
   return tonConnect;
 };
 
-console.log("Manifest URL:", "https://mgdggame.vercel.app/tonconnect-manifest.json");
 
