@@ -47,9 +47,9 @@ export default function Footer() {
                         />
                     </div>
                 </Link>
-                {hasTickets ? <Link href="/games">
-                    <div onClick={useTickets} className="w-[19vmin] sm:w-[9vmin] aspect-[99/88] relative active:scale-90 transition-transform duration-200">
-                        <p className=" absolute top-[-25%] left-1/2 -translate-x-1/2 font-bold text-white text-[1.2vmax] sm:text-[1.2vmin] text-center">Play</p>
+                {hasTickets ? 
+                    <div className="w-[19vmin] sm:w-[9vmin] aspect-[99/88] relative ">
+                        <p className=" absolute top-[-25%] left-1/2 -translate-x-1/2 font-bold text-white text-[1.2vmax] sm:text-[1.2vmin] text-center"></p>
                         <Image
                             src="/image/menu-game.png"
                             alt="meatIcon"
@@ -59,11 +59,11 @@ export default function Footer() {
 
                         />
                     </div>
-                </Link> :
-                    <div className="w-[19vmin] sm:w-[9vmin] aspect-[99/88] relative active:scale-90 transition-transform duration-200">
-                        <p className=" absolute top-[-25%] left-1/2 -translate-x-1/2 font-bold text-white text-[1.2vmax] sm:text-[1.2vmin] text-center">Play</p>
+                 :
+                    <div className="w-[19vmin] sm:w-[9vmin] aspect-[99/88] relative ">
+                        <p className=" absolute top-[-25%] left-1/2 -translate-x-1/2 font-bold text-white text-[1.2vmax] sm:text-[1.2vmin] text-center"></p>
                         <Image
-                            src="/image/menu-gameoff.png"
+                            src="/image/menu-game.png"
                             alt="meatIcon"
                             fill
                             style={{ objectFit: "cover" }}
